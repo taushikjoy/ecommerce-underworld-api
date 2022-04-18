@@ -1,9 +1,10 @@
 const router = require("express").Router();
 
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-//const CryptoJS = require("crypto-js");
+
+//register
 
 router.post("/register", async (req, res) => {
   const hashedpassword = await bcrypt.hash(req.body.password, 10);
@@ -29,7 +30,22 @@ router.post("/login", async (req, res) => {
   if (user && user.length > 0) {
     const isVallid = await bcrypt.compare(req.body.password, user[0].password);
     if (isVallid) {
-      res.send("password matched");
+      const token = jwt.sign(
+        {
+          username: user[0].username,
+          userId: user[0]._id,
+        },
+        process.env.JWT_SEC,
+        {
+          expiresIn: "3d",
+        }
+      );
+
+      res.status(200).json({
+        accesstoken: token,
+        user: user[0],
+        // user: user[0],
+      });
     } else {
       res.send("not matched");
     }
@@ -38,22 +54,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     const user = await User.findOne({ username: req.body.username });
-
-//     const hashedpassword = CryptoJS.AES.decrypt(
-//       user.password,
-//       process.env.PASS_SEC
-//     );
-//   } catch (error) {
-//     res.json(error);
-//   }
-// });
-
 module.exports = router;
-
-// CryptoJS.AES.encrypt(
-//   req.body.password,
-//   process.env.PASS_SEC
-// ).toString(),
