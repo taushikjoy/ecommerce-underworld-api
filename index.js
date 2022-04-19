@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRouter = require("./routes/user");
+const productRouter = require("./routes/products");
 const authRouter = require("./routes/auth");
 
 app.use(express.json());
@@ -21,6 +22,7 @@ app.listen(5000, () => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/products", productRouter);
 app.use("/api/auth", authRouter);
 
 // const testSchema = new mongoose.Schema({
