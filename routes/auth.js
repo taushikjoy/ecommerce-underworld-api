@@ -34,12 +34,14 @@ router.post("/login", async (req, res) => {
         {
           username: user[0].username,
           userId: user[0]._id,
+          isAdmin: user[0].isAdmin,
         },
         process.env.JWT_SEC,
         {
           expiresIn: "3d",
         }
       );
+      const { password, ...others } = user._doc;
 
       res.status(200).json({
         accesstoken: token,
