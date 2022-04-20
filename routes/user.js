@@ -44,7 +44,7 @@ router.patch("/:id", verifyTokenAndAuthorization, async (req, res) => {
   // }
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-      username: "joyupdated",
+      $set: req.body,
     });
     res.status(200).json(updatedUser);
   } catch (err) {

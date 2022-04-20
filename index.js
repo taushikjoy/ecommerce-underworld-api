@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/products");
+const cartRouter = require("./routes/cart");
 const authRouter = require("./routes/auth");
+const orderRouter = require("./routes/order");
 
 app.use(express.json());
 dotenv.config();
@@ -24,6 +26,8 @@ app.listen(5000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 
 // const testSchema = new mongoose.Schema({
 //   name: {
