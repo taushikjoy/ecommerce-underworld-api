@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/products");
@@ -9,6 +10,12 @@ const authRouter = require("./routes/auth");
 const orderRouter = require("./routes/order");
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 dotenv.config();
 
 //connect to database
@@ -28,29 +35,3 @@ app.use("/api/products", productRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
-
-// const testSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-// });
-
-// const Test = mongoose.model("tests", testSchema);
-
-// const createTest = async (req, res) => {
-//   try {
-//     const newTest = await Test.create(req.body);
-//     res.status(200).json({
-//       status: "success",
-
-//       data: {
-//         test: newTest,
-//       },
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// app.post("/", createTest);
