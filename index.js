@@ -32,6 +32,8 @@ app.listen(process.env.PORT || 5000, () => {
   console.log("success creating server");
 });
 
+app.get('/' , (req,res)=> res.send('sdjhfgbjhdsb'))
+
 app.use("/api/user", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/auth", authRouter);
