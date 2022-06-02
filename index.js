@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+
+//importing routes
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");

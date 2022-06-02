@@ -1,13 +1,15 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 // const checkLogin = require("../middlewares/checkLogin");
+const Cart = require("../models/Cart");
+
+
 const {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } = require("../middlewares/verifyToken");
 
-const Cart = require("../models/Cart");
 
 //add new cart
 

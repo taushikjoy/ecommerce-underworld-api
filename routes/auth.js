@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
 
 //LOGIN
 
-router.post("/login", async (req, res) => {
+router.post("/login/", async (req, res) => {
   const user = await User.find({ username: req.body.username });
 
   if (user && user.length > 0) {
